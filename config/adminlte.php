@@ -251,7 +251,7 @@ return [
                 ],
                 [
                     'text'  => 'Add Employee',
-                    'url'   => '#',
+                    'url'   => '/employees/create',
                     'icon'  => 'fa fa-user-plus'
                 ]
             ]

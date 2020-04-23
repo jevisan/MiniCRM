@@ -12,28 +12,25 @@
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        @if ($company->image)
-                            <img class="profile-user-img img-fluid img-circle"
-                                    src=""
-                                    alt="{{$company->name}}">
-                        @else
-                            <span class="fa fa-building" style="font-size:60px"></span>
-                        @endif
+                        <span class="fa fa-user" style="font-size:60px"></span>
                     </div>
 
-                    <h3 class="profile-username text-center">{{$company->name}}</h3>
+                    <h3 class="profile-username text-center">{{$employee->first_name.' '.$employee->last_name}}</h3>
                     <p class="text-muted text-center"></p>
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>Email</b> <a class="float-right">{{$company->email ?? '-'}}</a>
+                            <b>Email</b> <a class="float-right">{{$employee->email ?? '-'}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Website</b> <a class="float-right">{{$company->website ?? '-'}}</a>
+                            <b>Phone</b> <a class="float-right">{{$employee->phone ?? '-'}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Company</b> <a class="float-right">{{$employee->company ? $employee->company->name:'-'}}</a>
                         </li>
                     </ul>
 
-                    <a href="{{url('companies/'.$company->id.'/edit')}}" class="btn btn-primary btn-block"><b><i class="fa fa-pencil"></i> Edit</b></a>
+                    <a href="{{url('employees/'.$employee->id.'/edit')}}" class="btn btn-primary btn-block"><b><i class="fa fa-pencil"></i> Edit</b></a>
                 </div>
             </div>
             {{-- /.card --}}
@@ -46,11 +43,11 @@
                 </div>
                 {{-- /.card-header --}}
                 <div class="card-body">
-                    @foreach ($company->employees as $employee)
+                    {{-- @foreach ($company->employees as $employee)
                         <div class="post">
                             <div class="user-block">
                                 <div class="user-block">
-                                    <span class="fa fa-user" style="float:left"></span>
+                                    <span class="fa fa-user"></span>
                                     <span class="username">
                                         <a href="#">{{ $employee->first_name.' '.$employee->last_name }}</a>
 
@@ -59,7 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
                 {{-- /.card-body --}}
             </div>
