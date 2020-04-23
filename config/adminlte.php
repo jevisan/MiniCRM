@@ -215,65 +215,46 @@ return [
             'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
+            'text'        => 'Dashboard',
+            'url'         => '/',
+            'icon'        => 'fa fa-desktop',
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        'OPERATION',
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text'  => 'Companies',
+            'url'   => '/companies',
+            'icon'  => 'fa fa-building',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text'  => 'Company List',
+                    'url'   => '/companies',
+                    'icon'  => 'fa fa-list'
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text'  => 'Add Company',
+                    'url'   => '/companies/create',
+                    'icon'  => 'fa fa-plus'
+                ]
+            ]
+        ],
+        [
+            'text'  => 'Employees',
+            'url'   => '/employees',
+            'icon'  => 'fa fa-users',
+            'submenu' => [
+                [
+                    'text'  => 'Employees List',
+                    'url'   => '/employees',
+                    'icon'  => 'fa fa-list'
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+                    'text'  => 'Add Employee',
+                    'url'   => '#',
+                    'icon'  => 'fa fa-user-plus'
+                ]
+            ]
         ],
         ['header' => 'labels'],
         [
