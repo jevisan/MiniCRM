@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Company;
+use App\Mail\NewCompany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 class CompaniesController extends Controller
 {
@@ -48,7 +52,7 @@ class CompaniesController extends Controller
     {
         $attributes = $request->validate([
             'name'      => ['required', 'string'],
-            'email'     => ['nullable', 'email'],
+            'email'     => ['nullable', 'email', 'unique:App\Company,email'],
             'website'   => ['nullable', 'url'],
             'logo'      => ['nullable',
                             'image',
@@ -66,6 +70,10 @@ class CompaniesController extends Controller
         }
 
         $company = Company::create($attributes);
+
+        // send an email notifying new company created
+        $admin = User::where('name', 'Admin')->get();
+        Mail::to($admin)->send(new NewCompany($company));
 
         return redirect('/companies');
     }
@@ -115,7 +123,7 @@ class CompaniesController extends Controller
     {
         $attributes = $request->validate([
             'name'      => ['required', 'string'],
-            'email'     => ['nullable', 'email'],
+            'email'     => ['nullable', 'email', 'unique:App\Company,email'],
             'website'   => ['nullable', 'url'],
             'logo'      => ['nullable',
                             'image',
@@ -124,12 +132,14 @@ class CompaniesController extends Controller
                             'dimensions:min_width=100,min_height=100'], // min width and height: 100x100
         ]);
 
-        // storing logo file logic
+        // storing new logo file logic
         if ($request->has('logo')) {
+            // delete prev logo
+            $prev_logo = $company->logo;
+            Storage::disk('public')->delete('storage/'.$prev_logo);
+            // store new logo
             $path = $request->file('logo')->store('companies_logos', 'public');
             $attributes['logo'] = $path;
-        } else {
-            $attributes['logo'] = null;
         }
 
         $company->update($attributes);
