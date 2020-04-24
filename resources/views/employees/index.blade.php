@@ -33,9 +33,9 @@
                     @foreach ($employees as $employee)
                         <tr>
                             <td>{{ $employee->first_name.' '.$employee->last_name }}</td>
-                            <td>{{ $employee->email }}</td>
-                            <td>{{ $employee->phone }}</td>
-                            <td>{{ $employee->company->name }}</td>
+                            <td>{{ $employee->email ?? '-' }}</td>
+                            <td>{{ $employee->phone ?? '-' }}</td>
+                            <td>{{ $employee->company ? $employee->company->name:'-' }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ url('employees/'.$employee->id) }}" class="btn btn-info btn-flat">Examine</a>

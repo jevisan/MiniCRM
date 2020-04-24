@@ -50,13 +50,17 @@ class CompaniesController extends Controller
             'name'      => ['required', 'string'],
             'email'     => ['nullable', 'email'],
             'website'   => ['nullable', 'url'],
-            'logo'      => ['nullable', 'image', 'max:1024'],   // max file size of 1024 KB
+            'logo'      => ['nullable',
+                            'image',
+                            'max:2048',                                 // max file size of 2048 KB
+                            'mimetypes:image/jpeg,image/png',
+                            'dimensions:min_width=100,min_height=100'], // min width and height: 100x100
         ]);
 
         // storing logo file logic
-        if ($request->has('image')) {
-            $image_name = str_slug($request->input('name')).'_logo';
-            $attributes['logo'] = $image_name;
+        if ($request->has('logo')) {
+            $path = $request->file('logo')->store('companies_logos', 'public');
+            $attributes['logo'] = $path;
         } else {
             $attributes['logo'] = null;
         }
@@ -113,13 +117,17 @@ class CompaniesController extends Controller
             'name'      => ['required', 'string'],
             'email'     => ['nullable', 'email'],
             'website'   => ['nullable', 'url'],
-            'logo'      => ['nullable', 'image', 'max:1024'],   // max file size of 1024 KB
+            'logo'      => ['nullable',
+                            'image',
+                            'max:2048',                                 // max file size of 2048 KB
+                            'mimetypes:image/jpeg,image/png',
+                            'dimensions:min_width=100,min_height=100'], // min width and height: 100x100
         ]);
 
-        // updating logo file logic
-        if ($request->has('image')) {
-            $image_name = str_slug($request->input('name')).'_logo';
-            $attributes['logo'] = $image_name;
+        // storing logo file logic
+        if ($request->has('logo')) {
+            $path = $request->file('logo')->store('companies_logos', 'public');
+            $attributes['logo'] = $path;
         } else {
             $attributes['logo'] = null;
         }

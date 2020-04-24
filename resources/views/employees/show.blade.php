@@ -31,6 +31,7 @@
                     </ul>
 
                     <a href="{{url('employees/'.$employee->id.'/edit')}}" class="btn btn-primary btn-block"><b><i class="fa fa-pencil"></i> Edit</b></a>
+                    <a href="{{url('employees')}}" type="submit" class="btn btn-default btn-block">Return to list</a>
                 </div>
             </div>
             {{-- /.card --}}
@@ -43,20 +44,21 @@
                 </div>
                 {{-- /.card-header --}}
                 <div class="card-body">
-                    {{-- @foreach ($company->employees as $employee)
-                        <div class="post">
-                            <div class="user-block">
+                    @foreach ($employee->company->employees as $emp)
+                        @if ($emp->id != $employee->id)
+                            <div class="post">
                                 <div class="user-block">
                                     <span class="fa fa-user"></span>
                                     <span class="username">
-                                        <a href="#">{{ $employee->first_name.' '.$employee->last_name }}</a>
+                                        <a href="{{url('employees/'.$emp->id)}}">{{ $emp->first_name.' '.$emp->last_name }}</a>
 
                                     </span>
-                                    <span class="description">Created</span>
+                                    <span class="description">Employee</span>
                                 </div>
+                                <p>Member since: {{$employee->created_at->format('Y-m-d')}}</p>
                             </div>
-                        </div>
-                    @endforeach --}}
+                        @endif
+                    @endforeach
                 </div>
                 {{-- /.card-body --}}
             </div>

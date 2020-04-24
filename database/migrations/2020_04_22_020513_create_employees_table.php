@@ -19,10 +19,11 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('company_id')->references('id')->on('companies')
+                ->onDelete('set null');
         });
     }
 

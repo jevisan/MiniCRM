@@ -12,9 +12,9 @@
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        @if ($company->image)
+                        @if ($company->logo)
                             <img class="profile-user-img img-fluid img-circle"
-                                    src=""
+                                    src="{{ asset('storage/'.$company->logo) }}"
                                     alt="{{$company->name}}">
                         @else
                             <span class="fa fa-building" style="font-size:60px"></span>
@@ -34,6 +34,7 @@
                     </ul>
 
                     <a href="{{url('companies/'.$company->id.'/edit')}}" class="btn btn-primary btn-block"><b><i class="fa fa-pencil"></i> Edit</b></a>
+                    <a href="{{url('companies')}}" type="submit" class="btn btn-default btn-block">Return to list</a>
                 </div>
             </div>
             {{-- /.card --}}
@@ -49,15 +50,13 @@
                     @foreach ($company->employees as $employee)
                         <div class="post">
                             <div class="user-block">
-                                <div class="user-block">
-                                    <span class="fa fa-user" style="float:left"></span>
-                                    <span class="username">
-                                        <a href="#">{{ $employee->first_name.' '.$employee->last_name }}</a>
-
-                                    </span>
-                                    <span class="description">Created</span>
-                                </div>
+                                <span class="fa fa-user" style="float:left"></span>
+                                <span class="username">
+                                    <a href="{{ url('employees/'.$employee->id) }}">{{ $employee->first_name.' '.$employee->last_name }}</a>
+                                </span>
+                                <span class="description">Employee</span>
                             </div>
+                            <p>Member since: {{$employee->created_at->format('Y-m-d')}}</p>
                         </div>
                     @endforeach
                 </div>

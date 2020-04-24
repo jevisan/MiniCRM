@@ -12,53 +12,27 @@
             <h3 class="card-title">Edit Company</h3>
         </div>
         {{-- form start --}}
-        <form class="" action="{{ url('/companies/'.$company->id) }}" method="post">
+        <form class="" action="{{ url('/companies/'.$company->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="card-body">
-                <!-- NAME -->
-                @include('forms.text_input',
-                            [
-                                'label' => 'Name',
-                                'id' => 'company_name',
-                                'name' => 'name',
-                                'placeholder' => 'New Company\'s Name',
-                                'value' => $company->name
-                            ])
-                <!-- EMAIL -->
-                @include('forms.text_input',
-                            [
-                                'label' => 'Email',
-                                'id' => 'company_email',
-                                'name' => 'email',
-                                'type' => 'email',
-                                'placeholder' => 'New Company\'s Email',
-                                'value' => $company->email
-                            ])
-                <!-- WEBSITE -->
-                @include('forms.text_input',
-                            [
-                                'label' => 'Website',
-                                'id' => 'company_website',
-                                'name' => 'website',
-                                'placeholder' => 'New Company\'s Website',
-                                'value' => $company->website
-                            ])
-                <!-- LOGO -->
-                @include('forms.file_input',
-                            [
-                                'label' => 'Logo',
-                                'id' => 'company_logo',
-                                'name' => 'logo',
-                                'value' => $company->logo
-                            ])
-
+                @include('forms.edit_company')
             </div>
             {{-- /.card body --}}
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{{url('companies')}}" type="submit" class="btn btn-default">Return to list</a>
             </div>
         </form>
         {{-- form end --}}
     </div>
+@endsection
+
+@section('js')
+    <script type="text/javascript" src="{{ asset('plugins/bs-custom-file-input.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
 @endsection

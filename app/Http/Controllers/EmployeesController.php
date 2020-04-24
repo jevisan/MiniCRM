@@ -54,7 +54,11 @@ class EmployeesController extends Controller
             'company'       => ['required']
         ]);
 
-        $attributes['company_id'] = $attributes['company'];
+        if ($attributes['company'] != 0) {
+            $attributes['company_id'] = $attributes['company'];
+        } else {
+            $attributes['company_id'] = null;
+        }
 
         $employee = Employee::create($attributes);
 
@@ -111,6 +115,13 @@ class EmployeesController extends Controller
             'phone'         => ['nullable', 'digits_between:10,12'],
             'company'       => ['required']
         ]);
+
+        if ($attributes['company'] != 0) {
+            $attributes['company_id'] = $attributes['company'];
+        } else {
+            $attributes['company_id'] = null;
+        }
+
         $employee->update($attributes);
 
         return redirect('/employees');
