@@ -210,16 +210,9 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
             'text'        => 'Dashboard',
             'url'         => '/',
             'icon'        => 'fa fa-desktop',
-            'label'       => 4,
-            'label_color' => 'success',
         ],
         'OPERATION',
         [
@@ -255,19 +248,6 @@ return [
                     'icon'  => 'fa fa-user-plus'
                 ]
             ]
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'aqua',
         ],
     ],
 
