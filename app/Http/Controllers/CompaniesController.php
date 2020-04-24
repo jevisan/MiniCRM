@@ -157,6 +157,8 @@ class CompaniesController extends Controller
     {
         $company->delete();
         // delete logo logic
+        $logo = $company->logo;
+        Storage::disk('public')->delete('storage/'.$logo);
         return redirect('companies');
     }
 }
